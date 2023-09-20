@@ -20,7 +20,7 @@ filtered_df['Difference'] = abs(filtered_df['Median'] - target_gpa)
 # 4. 按差异度升序排序
 filtered_df = filtered_df.sort_values(by='Difference')
 
-# 打印推荐学校列表
+# 打印推荐学校
 if not filtered_df.empty:
     print("推荐学校:")
     for index, school in filtered_df.iterrows():
