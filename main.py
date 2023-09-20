@@ -14,19 +14,23 @@ filtered_df = df[df['Country'] == target_country]
 # 2. 筛选符合GPA范围的学校
 filtered_df = filtered_df[(filtered_df['Max'] >= target_gpa) & (filtered_df['Min'] <= target_gpa)]
 
-# 3. 计算查询成绩与中位数的差值，按差异度最小排序
+# 3. 计算查询成绩与中位数的差值
 filtered_df['Difference'] = abs(filtered_df['Median'] - target_gpa)
+
+# 4. 按差异度升序排序
 filtered_df = filtered_df.sort_values(by='Difference')
 
-# 打印推荐学校
+# 打印推荐学校列表
 if not filtered_df.empty:
-    recommended_school = filtered_df.iloc[0]
     print("推荐学校:")
-    print("学校:", recommended_school['School'])
-    print("国家:", recommended_school['Country'])
-    print("最大值:", recommended_school['Max'])
-    print("最小值:", recommended_school['Min'])
-    print("中位数:", recommended_school['Median'])
-    print("差异度:", recommended_school['Difference'])
+    for index, school in filtered_df.iterrows():
+        print("学校:", school['School'])
+        print("---------------")
+        # print("国家:", school['Country'])
+        # print("最大值:", school['Max'])
+        # print("最小值:", school['Min'])
+        # print("中位数:", school['Median'])
+        # print("差异度:", school['Difference'])
+        # print("-------------")
 else:
     print("没有符合条件的学校。")
